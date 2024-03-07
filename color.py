@@ -225,22 +225,23 @@ def plot_monitor_chromaticity(x0, y0, z0):
     xyz_coords = np.stack((x.flatten(), y.flatten(), z.flatten()), axis=1)
 
     # Transform xyz to RGB using matrix multiplication
-    RGB_flat = np.dot(xyz_coords, M709_inv.T)
+    RGB_flat = np.dot(M709_inv, xyz_coords)
 
     # Reshape the RGB values back to the shape of the meshgrid
-    RGB = RGB_flat.reshape(x.shape[0], x.shape[1], 3)
+    rgb_image = RGB_flat.reshape(3, x.shape[0], x.shape[1])
+    rgb_image = np.transpose(rgb_image, (1, 2, 0))
 
     # Clip RGB values
-    RGB[RGB < 0] = 0
-    RGB[RGB > 1] = 1
+    rgb_image[rgb_image < 0] = 0
+    rgb_image[rgb_image > 1] = 1
 
     # Gamma correction
     gamma = 2.2
-    RGB_corrected = np.power(RGB, 1 / gamma)
+    rgb_corrected = np.power(rgb_image, 1 / gamma)
 
     # Display color diagram
     fig, ax = plt.subplots()
-    ax.imshow(RGB_corrected, extent=[0, 1, 0, 1])
+    ax.imshow(rgb_corrected, extent=[0, 1, 0, 1])
     
     # Display pure spectral source
     # transform XYZ to (x,y)

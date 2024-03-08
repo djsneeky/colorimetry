@@ -33,3 +33,7 @@ Transformation matrix M_709_D65:
 
 The D65 light source is preferred for its balanced spectrum and natural color rendition, while the flourescent source introduces color inaccuracies. The flourescent source appears to create an image that is cooler or greener in the mid tones, and is overall less vibrant than the D65 source render.
 
+### Color Chromaticity Diagram
+
+![alt text](../images/monitor_chromaticity.png)
+

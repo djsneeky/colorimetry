@@ -222,7 +222,7 @@ def plot_monitor_chromaticity(x0, y0, z0):
     M709_inv = np.linalg.inv(M709)
 
     # Reshape the meshgrid coordinates to prepare for matrix multiplication
-    xyz_coords = np.stack((x.flatten(), y.flatten(), z.flatten()), axis=1)
+    xyz_coords = np.stack((x.flatten(), y.flatten(), z.flatten()))
 
     # Transform xyz to RGB using matrix multiplication
     RGB_flat = np.dot(M709_inv, xyz_coords)
@@ -253,8 +253,7 @@ def plot_monitor_chromaticity(x0, y0, z0):
     plt.xlabel('x')
     plt.ylabel('y')
 
-    # Show the plot
-    plt.show()
+    fig.savefig('images/monitor_chromaticity.png')
 
 if __name__ == "__main__":
     main()
